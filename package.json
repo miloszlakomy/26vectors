@@ -5,8 +5,12 @@
   "source": "src/index.html",
   "homepage": "https://miloszlakomy.github.io/26vectors/",
   "scripts": {
-    "predeploy": "npx parcel build src/index.html --public-url ./ --log-level verbose",
-    "deploy": "gh-pages -d dist",
+    "start": "parcel ./src/index.html",
+    "prebuild-dev": "shx rm -rf dist/*",
+    "build-dev": "parcel build ./src/index.html --no-optimize --public-url ./",
+    "prebuild": "shx rm -rf dist/*",
+    "build": "parcel build ./src/index.html --public-url ./",
+    "push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -20,6 +24,7 @@
     "mathjs": "^15.1.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "shx": "^0.3.2",
     "three": "^0.181.1"
   },
   "@parcel/resolver-default": {
