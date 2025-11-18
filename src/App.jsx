@@ -47,7 +47,9 @@ export default function App() {
         directionalLight.position.set(5, 5, 5); // Position the light
         scene.add(directionalLight);
 
-        camera.position.z = 5;
+        const initialCameraZ = 7.5;
+        let cameraScale = 1;
+        camera.position.z = cameraScale * initialCameraZ;
 
         // Variables for mouse control
         let isDragging = false;
@@ -90,15 +92,17 @@ export default function App() {
 
         const onMouseWheel = (event) => {
             event.preventDefault(); // Prevent default scrolling behavior
-            const scaleFactor = 0.025; // Change this value for faster/slower scaling
-            camera.position.z += event.deltaY * scaleFactor;
+            const scaleFactor = 0.0025; // Change this value for faster/slower scaling
+            cameraScale += event.deltaY * scaleFactor
 
             // Prevent zooming too far or too close
-            if (camera.position.z < 0) {
-                camera.position.z = 0;
-            } else if (camera.position.z > 15) {
-                camera.position.z = 15;
+            if (cameraScale < 0) {
+                cameraScale = 0;
+            } else if (cameraScale > 5) {
+                cameraScale = 5;
             }
+
+            camera.position.z = cameraScale * initialCameraZ;
         };
 
         // Event listeners
