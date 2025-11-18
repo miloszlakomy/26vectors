@@ -5,7 +5,7 @@
   "source": "src/index.html",
   "homepage": "https://miloszlakomy.github.io/26vectors/",
   "scripts": {
-    "predeploy": "npx parcel build src/index.html --log-level verbose",
+    "predeploy": "npx parcel build src/index.html --public-url ./ --log-level verbose",
     "deploy": "gh-pages -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
