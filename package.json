@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "source": "src/index.html",
+  "homepage": "https://miloszlakomy.github.io/26vectors/",
   "scripts": {
+    "predeploy": "npx parcel build src/index.html --log-level verbose",
+    "deploy": "gh-pages -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "gh-pages": "^6.3.0",
     "parcel": "^2.16.1"
   },
   "dependencies": {
