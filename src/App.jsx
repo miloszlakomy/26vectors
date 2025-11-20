@@ -12,10 +12,7 @@ const isNonNegativeNumber = (value) => {
 
 export default function App() {
     const mountRef = React.useRef(null);
-    // const [dimensions, setDimensions] = React.useState({ width: 0.1, height: 0.1, depth: 0.1 });
     const [textareaValue, setTextareaValue] = React.useState("");
-    // const [textDimensions, setTextDimensions] = React.useState({ width: 1, height: 1, depth: 1 });
-    // const [box, setBox] = React.useState(null);
     const [hull, setHull] = React.useState(null);
     const [textareaPlaceholder, setTextareaPlaceholder] = React.useState(
         "[6,5,6, 5,3,5, 6,5,6, " +
@@ -75,11 +72,6 @@ export default function App() {
                 };
 
                 // Update rotation based on mouse movement
-                /*
-                newBox.rotation.y += deltaMove.x * 0.01;
-                newBox.rotation.x += deltaMove.y * 0.01;
-                */
-
                 newHull.rotation.y += deltaMove.x * 0.01;
                 newHull.rotation.x += deltaMove.y * 0.01;
             }
@@ -91,7 +83,7 @@ export default function App() {
         };
 
         const onMouseWheel = (event) => {
-            event.preventDefault(); // Prevent default scrolling behavior
+            event.preventDefault();     // Prevent default scrolling behavior
             const scaleFactor = 0.0025; // Change this value for faster/slower scaling
             cameraScale += event.deltaY * scaleFactor
 
@@ -119,16 +111,6 @@ export default function App() {
         };
 
 
-        // Create a cube
-        /*
-        const geometry = new THREE.BoxGeometry(dimensions.width, dimensions.height, dimensions.depth);
-        const material = new THREE.MeshStandardMaterial({ color: 0x00ff00, side: THREE.DoubleSide });
-        const newBox = new THREE.Mesh(geometry, material);
-        scene.add(newBox);
-        setBox(newBox);
-        */
-
-
         // Create initial hull
         const hullGeometry = getHullGeometry("");
         const hullMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, side: THREE.DoubleSide });
@@ -151,53 +133,16 @@ export default function App() {
             mountRef.current.removeEventListener("mousemove",  onMouseMove);
             mountRef.current.removeEventListener("wheel",      onMouseWheel);
             mountRef.current.removeChild(renderer.domElement);
-            // scene.remove(newBox);
             scene.remove(newHull);
         };
     }, []);
 
-    // Update the dimensions of the box based on input
-    /*
-    const handleDimensionsChange = (e) => {
-        const { name, value } = e.target;
-        const newDimensions = { ...dimensions, [name]: parseFloat(value) };
-
-        setDimensions(newDimensions);
-        setTextDimensions(newDimensions);
-        updateBoxGeometry(newDimensions);
-    };
-    const handleTextDimensionsChange = (e) => {
-        const { name, value } = e.target;
-        const newTextDimensions = { ...textDimensions, [name]: value };
-        setTextDimensions(newTextDimensions);
-
-        // Allow all input for user experience but validate before updating state
-        const newValue = parseFloat(value);
-        if (!isNonNegativeNumber(newValue)) { return; }
-
-        const newDimensions = { ...dimensions, [name]: newValue };
-        setDimensions(newDimensions);
-        updateBoxGeometry(newDimensions);
-    };
-    */
+    // Update state based on input
     const handleTextareaValueChange = (e) => {
         const newTextareaValue = e.target.value;
         setTextareaValue(newTextareaValue);
         updateHullGeometry(newTextareaValue);
     };
-    /*
-    const updateBoxGeometry = (newDimensions) => {
-        if (!box) { return; }
-
-        const geometry = new THREE.BoxGeometry(
-            1e-9 + newDimensions.width,
-            1e-9 + newDimensions.height,
-            1e-9 + newDimensions.depth,
-        );
-        box.geometry.dispose();  // Cleanup old geometry
-        box.geometry = geometry; // Set new geometry
-    };
-    */
     const updateHullGeometry = (newTextareaValue) => {
         if (!hull) { return; }
         const geometry = getHullGeometry(newTextareaValue);
@@ -248,67 +193,3 @@ export default function App() {
         </div></div>
     );
 }
-
-/*
-                <!--
-                <label>
-                    <input
-                        type="range"
-                        name="width"
-                        min="0.1"
-                        max="3"
-                        step="0.1"
-                        value={dimensions.width}
-                        onChange={handleDimensionsChange}
-                    />
-                    <input
-                        type="text"
-                        name="width"
-                        value={textDimensions.width}
-                        onChange={handleTextDimensionsChange}
-                        style={{ width: "50px", marginLeft: "10px", marginRight: "10px" }}
-                    />
-                    Width
-                </label>
-                <br />
-                <label>
-                    <input
-                        type="range"
-                        name="height"
-                        min="0.1"
-                        max="3"
-                        step="0.1"
-                        value={dimensions.height}
-                        onChange={handleDimensionsChange}
-                    />
-                    <input
-                        type="text"
-                        name="height"
-                        value={textDimensions.height}
-                        onChange={handleTextDimensionsChange}
-                        style={{ width: "50px", marginLeft: "10px", marginRight: "10px" }}
-                    />
-                    Height
-                </label>
-                <br />
-                <label>
-                    <input
-                        type="range"
-                        name="depth"
-                        min="0.1"
-                        max="3"
-                        step="0.1"
-                        value={dimensions.depth}
-                        onChange={handleDimensionsChange}
-                    />
-                    <input
-                        type="text"
-                        name="depth"
-                        value={textDimensions.depth}
-                        onChange={handleTextDimensionsChange}
-                        style={{ width: "50px", marginLeft: "10px", marginRight: "10px" }}
-                    />
-                    Depth
-                </label>
-                -->
-*/
