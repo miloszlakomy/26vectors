@@ -187,7 +187,7 @@ export default function App() {
         else { hull.position.x = -translationSideBySide; }
     };
     const getHullGeometry = (newTextareaValue, defaultTextareaValue) => {
-        const vc = new VertexCloud({ side_length: 10, vertices_per_side: 11 });
+        const vc = new VertexCloud({ side_length: 10, vertices_per_side: 61 });
         const ac = [-1, 0, 1];  // Allowed coordinates
         const vectors = [];
         for (const x of ac) { for (const y of ac) { for (const z of ac) {
