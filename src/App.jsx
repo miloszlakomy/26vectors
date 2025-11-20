@@ -5,11 +5,6 @@ import { ConvexGeometry } from "three/addons/geometries/ConvexGeometry.js";
 
 import { Plane, VertexCloud, Versor } from "./VertexCloud.jsx";
 
-const isNonNegativeNumber = (value) => {
-    const number = parseFloat(value);
-    return !isNaN(number) && number >= 0;
-};
-
 const isGeometryEmpty = (geometry) => {
     return !geometry.attributes.position || geometry.attributes.position.count === 0;
 };
