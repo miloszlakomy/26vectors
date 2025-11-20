@@ -12,13 +12,14 @@ const isNonNegativeNumber = (value) => {
 
 export default function App() {
     const mountRef = React.useRef(null);
-    const [textareaValue, setTextareaValue] = React.useState("");
     const [hull, setHull] = React.useState(null);
     const [textareaPlaceholder, setTextareaPlaceholder] = React.useState(
+        "E.g.: " +
         "[6,5,6, 5,3,5, 6,5,6, " +
         " 5,3,5, 3,  3, 5,3,5, " +
         " 6,5,6, 5,3,5, 6,5,6]"
     );
+    const [textareaValue, setTextareaValue] = React.useState(textareaPlaceholder);
 
     React.useEffect(() => {
         // const canvasWidth = window.innerWidth;
@@ -182,10 +183,14 @@ export default function App() {
                         resize: "vertical", /* Disallow horizontal resizing */
                     }}
 
-                    placeholder={textareaPlaceholder}
                     value={textareaValue}
                     onChange={handleTextareaValueChange}
                 />
+                <br />
+                <br />
+                <br />
+                <br />
+                All characters other than optional minus, followed by digits, with optional '.' decimal separator, are ignored.
             </div></div>
             <div style={{ display: "inline-block" }}>
                 <div ref={mountRef} style={{ width: "67vw", height: "100vh", borderLeft: "1px solid gray" }} />
